@@ -39,7 +39,6 @@
 ; Behavior ;
 ;;;;;;;;;;;;
 
-
 ; Show line numbers
 (global-display-line-numbers-mode)
 
@@ -95,3 +94,18 @@
 ;;;;;;;;;;
 
 (set-face-foreground 'font-lock-comment-face "magenta")
+
+;;;;;;;;;;;;;;;;
+; Key Bindings ;
+;;;;;;;;;;;;;;;;
+
+; Make M-f to move to the beginning of the next word
+(require 'misc)
+(define-key global-map (kbd "M-f") (lambda ()
+				     (interactive)
+				     (forward-to-word 1)))
+
+; Make M-F move to end of next word
+(define-key global-map (kbd "M-F") (lambda ()
+				     (interactive)
+				     (forward-word)))
