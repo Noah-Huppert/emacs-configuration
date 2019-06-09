@@ -1,3 +1,6 @@
 # Auto saves
 auto-save-list
 backup
+
+# Game scores
+games/*-scores
