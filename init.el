@@ -109,6 +109,11 @@
 (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
 (add-hook 'ielm-mode-hook 'eldoc-mode)
 
+;; Org mode
+(setq org-agenda-files (list (expand-file-name "~/documents/notebook.org")))
+(setq org-todo-keywords
+	 '((sequence "TODO" "DOING" "PAUSED" "|" "DONE")))
+
 ;;; Languages
 ;;Salt state
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
@@ -158,3 +163,6 @@
           (lambda ()
             (when (string-equal "tsx" (file-name-extension buffer-file-name))
               (setup-tide-mode))))
+
+;; Org mode agenda
+(define-key org-mode-map (kbd "C-c a") 'org-agenda)
