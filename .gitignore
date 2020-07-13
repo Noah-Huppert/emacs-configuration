@@ -4,3 +4,6 @@ backup
 
 # Game scores
 games/*-scores
+
+# Shell history
+eshell/history
