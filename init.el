@@ -1,6 +1,6 @@
 ;;; Emacs Core
 ;; Local plugins
-(add-to-list 'load-path "/home/noah/.emacs.d/lisp")
+(add-to-list 'load-path "~/.emacs.d/lisp")
 
 ;; Initialize package manager
 (require 'package)
