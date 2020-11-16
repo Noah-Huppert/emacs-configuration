@@ -132,7 +132,9 @@
 (require 'px)
 
 ;;; Colors
-(load-theme 'zenburn t)
+;;;(load-theme 'zenburn t)
+;;;(load-theme 'tangotango t)
+(load-theme 'doom-one t)
 
 ;;; Key Bindings
 ;; Make M-f to move to the beginning of the next word
