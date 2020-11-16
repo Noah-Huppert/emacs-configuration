@@ -114,7 +114,7 @@
 ;; Org mode
 (setq org-agenda-files (list (expand-file-name "~/documents/notebook.org")))
 (setq org-todo-keywords
-	 '((sequence "TODO" "DOING" "PAUSED" "|" "DONE")))
+	 '((sequence "TODO" "DOING" "PAUSED" "|" "DONE" "ABANDONED")))
 
 ;;; Languages
 ;;Salt state
