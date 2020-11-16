@@ -36,6 +36,9 @@
 (global-font-lock-mode t)
 
 ;;; Layout
+;; Font
+(setq default-frame-alist '((font . "Hack-16")))
+
 ;; Tab width
 (setq-default tab-width 5)
 
