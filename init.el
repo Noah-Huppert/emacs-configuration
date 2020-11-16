@@ -170,3 +170,16 @@
 
 ;; Org mode agenda
 (define-key org-mode-map (kbd "C-c a") 'org-agenda)
+
+;; Terminal
+;;; GPG pin entry
+;;; From: https://emacs.stackexchange.com/a/32882
+(setq epa-pinentry-mode 'loopback) ; Configure EasyPG assistant to use loopback
+								;(pinentry-start) ; Start the pinentry server
+(defun my-shell () (ansi-term "/usr/bin/bash"))
+(global-set-key (kbd "M-<return>")
+			 (lambda () (interactive)
+			   (ansi-term "/usr/bin/bash")))
+
+;;; Line wrapping: Unsure, either enables or disables terminal line wrapping
+(toggle-truncate-lines 1)

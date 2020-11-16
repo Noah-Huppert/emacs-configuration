@@ -1,0 +1,13 @@
+# Target labels
+ libvterm
+# Source files and their labels
+/home/noah/.emacs.d/elpa/vterm-20201113.1531/build/CMakeFiles/libvterm
+/home/noah/.emacs.d/elpa/vterm-20201113.1531/build/CMakeFiles/libvterm.rule
+/home/noah/.emacs.d/elpa/vterm-20201113.1531/build/CMakeFiles/libvterm-complete.rule
+/home/noah/.emacs.d/elpa/vterm-20201113.1531/build/libvterm-prefix/src/libvterm-stamp/libvterm-install.rule
+/home/noah/.emacs.d/elpa/vterm-20201113.1531/build/libvterm-prefix/src/libvterm-stamp/libvterm-mkdir.rule
+/home/noah/.emacs.d/elpa/vterm-20201113.1531/build/libvterm-prefix/src/libvterm-stamp/libvterm-download.rule
+/home/noah/.emacs.d/elpa/vterm-20201113.1531/build/libvterm-prefix/src/libvterm-stamp/libvterm-update.rule
+/home/noah/.emacs.d/elpa/vterm-20201113.1531/build/libvterm-prefix/src/libvterm-stamp/libvterm-patch.rule
+/home/noah/.emacs.d/elpa/vterm-20201113.1531/build/libvterm-prefix/src/libvterm-stamp/libvterm-configure.rule
+/home/noah/.emacs.d/elpa/vterm-20201113.1531/build/libvterm-prefix/src/libvterm-stamp/libvterm-build.rule
