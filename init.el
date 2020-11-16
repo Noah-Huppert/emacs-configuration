@@ -183,3 +183,9 @@
 
 ;;; Line wrapping: Unsure, either enables or disables terminal line wrapping
 (toggle-truncate-lines 1)
+
+;;; Kill buffer when inferior shell exits
+;;; From: https://stackoverflow.com/a/23691628
+(defadvice term-handle-exit
+  (after term-kill-buffer-on-exit activate)
+(kill-buffer))
