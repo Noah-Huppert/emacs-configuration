@@ -191,3 +191,7 @@
   (after term-kill-buffer-on-exit activate)
 (kill-buffer))
  
+;;; Shell management
+(require 'shell-switcher)
+(setq shell-switcher-mode t)
+(setq-default shell-switcher-new-shell-function 'my-term)
