@@ -46,8 +46,8 @@
 ;; Editor config
 (editorconfig-mode 1)
 
-;; Show line numbers
-(global-display-line-numbers-mode)
+;; Line numbers
+(global-linum-mode)
 
 ;; Max line length
 (require 'column-marker)
@@ -183,7 +183,7 @@
 (global-set-key (kbd "C-c C-<return>") 'my-term)
 
 ;;; Line wrapping: Unsure, either enables or disables terminal line wrapping
-(toggle-truncate-lines 1)
+;(toggle-truncate-lines 1)
 
 ;;; Kill buffer when inferior shell exits
 ;;; From: https://stackoverflow.com/a/23691628
@@ -195,3 +195,7 @@
 (require 'shell-switcher)
 (setq shell-switcher-mode t)
 (setq-default shell-switcher-new-shell-function 'my-term)
+
+;;; Hide line numbers
+(add-hook 'term-mode-hook
+		(lambda () (linum-mode 0)))
