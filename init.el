@@ -58,7 +58,7 @@
 (add-hook 'text-mode-hook 'flyspell-mode)
 
 ;; Highlight hex colors
-;;(define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
+;;(e-globalized-minor-mode my-global-rainbow-mode rainbow-mode
 ;;  (lambda () (rainbow-mode t)))
 
 ;;(my-global-rainbow-mode t)
@@ -99,6 +99,15 @@
           (rename-buffer new-name)
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
+
+;; C-x x Save and kill buffer
+(defun save-and-kill-buffer ()
+  "Save and kill a buffer, similar to save-buffers-kill-terminal but only kills the
+current buffer."
+  (interactive)
+  (progn (save-buffer)
+	    (kill-buffer)))
+(global-set-key (kbd "C-c x") 'save-and-kill-buffer)
 
 ;; Auto complete
 ;; (require 'company)
