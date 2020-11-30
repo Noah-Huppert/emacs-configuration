@@ -4,7 +4,7 @@
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-refile-last-stored"
  (filename . "~/documents/notebook.org")
- (front-context-string . "** DONE Oliver g")
- (rear-context-string . "ty private key.\n")
- (position . 45683))
+ (front-context-string . "** DONE Emacs du")
+ (rear-context-string . " then compress.\n")
+ (position . 73150))
 )

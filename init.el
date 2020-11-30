@@ -1,4 +1,5 @@
-;;; Emacs Core
+;;
+								; Emacs Core
 ;; Local plugins
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
@@ -128,6 +129,11 @@ current buffer."
 (setq org-todo-keywords
 	 '((sequence "TODO" "DOING" "PAUSED" "|" "DONE" "ABANDONED")))
 
+;; Organize buffers by project
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+
 ;;; Languages
 ;;Salt state
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
@@ -208,3 +214,4 @@ current buffer."
 ;;; Hide line numbers
 (add-hook 'term-mode-hook
 		(lambda () (linum-mode 0)))
+(setq term-suppress-hard-newline t)

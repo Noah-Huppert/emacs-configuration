@@ -1,0 +1,1 @@
+("~/documents/libraries/js-borzoi-test/" "~/documents/libraries/envconfig-js/" "~/.emacs.d/")
