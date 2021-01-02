@@ -44,6 +44,17 @@
 (setq-default tab-width 5)
 
 ;;; Behavior
+;; C-<return> = Exit search at beginning of match
+
+
+(define-key isearch-mode-map [(control return)]
+  #'isearch-exit-other-end)
+(defun isearch-exit-other-end ()
+  "Exit isearch, at the opposite end of the string."
+  (interactive)
+  (isearch-exit)
+  (goto-char isearch-other-end))
+
 ;; Editor config
 (editorconfig-mode 1)
 
