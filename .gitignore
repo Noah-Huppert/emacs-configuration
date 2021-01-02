@@ -7,3 +7,6 @@ games/*-scores
 
 # Shell history
 eshell/history
+
+# Desktop sessions, maybe for Wayland??
+session.*
