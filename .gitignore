@@ -10,3 +10,6 @@ eshell/history
 
 # Desktop sessions, maybe for Wayland??
 session.*
+
+# Buffer grouping in "projects" metadata file
+projectile-bookmarks.eld
