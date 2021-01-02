@@ -38,7 +38,7 @@
 
 ;;; Layout
 ;; Font
-(setq default-frame-alist '((font . "Hack-16")))
+(setq default-frame-alist '((font . "Hack-12")))
 
 ;; Tab width
 (setq-default tab-width 5)
@@ -153,6 +153,7 @@ current buffer."
 ;;;(load-theme 'zenburn t)
 ;;;(load-theme 'tangotango t)
 (load-theme 'doom-one t)
+;(set-face-foreground 'font-lock-comment-face "green")
 
 ;;; Key Bindings
 ;; Make M-f to move to the beginning of the next word
