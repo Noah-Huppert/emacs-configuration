@@ -147,6 +147,13 @@ current buffer."
 (setq org-todo-keywords
 	 '((sequence "TODO" "DOING" "PAUSED" "|" "DONE" "ABANDONED")))
 
+(setq org-tempo-keywords-alist
+	 '(("L" . "latex")
+	  ("H" . "html")
+	  ("A" . "ascii")
+	  ("i" . "index")
+	  ("s" . "src")))
+
 ;; Organize buffers by project
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
