@@ -45,8 +45,6 @@
 
 ;;; Behavior
 ;; C-<return> = Exit search at beginning of match
-
-
 (define-key isearch-mode-map [(control return)]
   #'isearch-exit-other-end)
 (defun isearch-exit-other-end ()
@@ -136,7 +134,16 @@ current buffer."
 (add-hook 'ielm-mode-hook 'eldoc-mode)
 
 ;; Org mode
-(setq org-agenda-files (list (expand-file-name "~/documents/notebook.org")))
+								;(setq org-agenda-files (list (expand-file-name "~/documents/notebook.org")))
+(setq org-agenda-files
+	 (mapcar 'expand-file-name
+		    (list
+			"~/documents/school/y5/afroam/afroam-133/planner.org"
+			"~/documents/school/y5/cs/cs-alligator/planner.org"
+			"~/documents/school/y5/cs/cs-370/planner.org"
+			"~/documents/school/y5/spanish/spanish-240/planner.org"
+			"~/documents/school/y5/cs/cics-305/planner.org" 
+			"~/documents/school/y5/cs/cs-590a/planner.org")))
 (setq org-todo-keywords
 	 '((sequence "TODO" "DOING" "PAUSED" "|" "DONE" "ABANDONED")))
 
