@@ -9,10 +9,11 @@
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 
 (setq package-enable-at-startup nil)
+(package-refresh-contents)
 (package-initialize)
 
-(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
+;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 
 ;; Save all backup files in a dedicated directory
 ;; https://stackoverflow.com/a/2680682
