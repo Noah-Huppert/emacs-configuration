@@ -238,7 +238,7 @@ current buffer."
 ;;; From: https://emacs.stackexchange.com/a/32882
 (setq epa-pinentry-mode 'loopback) ; Configure EasyPG assistant to use loopback
 								;(pinentry-start) ; Start the pinentry server
-(defun my-term () (interactive) (ansi-term "/usr/bin/bash"))
+(defun my-term () (interactive) (ansi-term (substitute-env-vars "$SHELL")))
 (global-set-key (kbd "C-c C-<return>") 'my-term)
 
 ;;; Line wrapping: Unsure, either enables or disables terminal line wrapping
