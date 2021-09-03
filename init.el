@@ -202,8 +202,6 @@ current buffer."
 ;; Git integration
 (use-package magit
   :ensure t)
-(use-package git-commit
-  :ensure t)
 
 ;; Dired
 (use-package dired-avfs
