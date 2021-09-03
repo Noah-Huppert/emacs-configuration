@@ -1,16 +1,13 @@
-;;
-								; Emacs Core
+								; Plugins
 ;; Local plugins
 (add-to-list 'load-path "~/.emacs.d/lisp")
 
-;; Initialize package manager
+;; Built in package manager
 (require 'package)
 
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
 
-;; (setq package-enable-at-startup nil)
-;; (package-refresh-contents)
 (package-initialize)
 
 ;; (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
@@ -30,6 +27,9 @@
 ;; https://www.emacswiki.org/emacs/AutoSave
 (setq backup-directory-alist
       `(("." . ,(concat user-emacs-directory "backup"))))
+;; Use Package
+(eval-when-compile
+  (require 'use-package))
 
 ;; Place customize files in seperate file
 (setq custom-file "~/.emacs.d/custom.el")
