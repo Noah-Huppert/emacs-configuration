@@ -179,6 +179,25 @@ current buffer."
 (setq gc-cons-percentage 0.5)
 (run-with-idle-timer 5 t #'garbage-collect)
 
+;; Terminal
+(defun my-term () (interactive) (ansi-term "/usr/bin/bash"))
+(global-set-key (kbd "C-c C-<return>") 'my-term)
+
+;;; Kill buffer when inferior shell exits
+;;; From: https://stackoverflow.com/a/23691628
+(defadvice term-handle-exit
+  (after term-kill-buffer-on-exit activate)
+(kill-buffer))
+ 
+;;; Shell management
+(require 'shell-switcher)
+(setq shell-switcher-mode t)
+(setq-default shell-switcher-new-shell-function 'my-term)
+
+;;; Hide line numbers
+(add-hook 'term-mode-hook
+		(lambda () (linum-mode 0)))
+(setq term-suppress-hard-newline t)
 								; Programming Languages
 ;;Salt state
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
@@ -215,27 +234,6 @@ current buffer."
               (setup-tide-mode))))
 
 
-;; Terminal
-;;; GPG pin entry
-;;; From: https://emacs.stackexchange.com/a/32882
-(setq epa-pinentry-mode 'loopback) ; Configure EasyPG assistant to use loopback
-								;(pinentry-start) ; Start the pinentry server
-(defun my-term () (interactive) (ansi-term "/usr/bin/bash"))
-(global-set-key (kbd "C-c C-<return>") 'my-term)
-
-;;; Line wrapping: Unsure, either enables or disables terminal line wrapping
-;(toggle-truncate-lines 1)
-
-;;; Kill buffer when inferior shell exits
-;;; From: https://stackoverflow.com/a/23691628
-(defadvice term-handle-exit
-  (after term-kill-buffer-on-exit activate)
-(kill-buffer))
- 
-;;; Shell management
-(require 'shell-switcher)
-(setq shell-switcher-mode t)
-(setq-default shell-switcher-new-shell-function 'my-term)
 
 ;;; Hide line numbers
 (add-hook 'term-mode-hook
