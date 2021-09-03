@@ -180,7 +180,7 @@ current buffer."
 (run-with-idle-timer 5 t #'garbage-collect)
 
 ;; Terminal
-(defun my-term () (interactive) (ansi-term "/usr/bin/bash"))
+(defun my-term () (interactive) (ansi-term (substitute-env-vars "$SHELL")))
 (global-set-key (kbd "C-c C-<return>") 'my-term)
 
 ;;; Kill buffer when inferior shell exits
