@@ -68,9 +68,9 @@
 (global-linum-mode)
 
 ;; Max line length
-(require 'column-marker)
-(add-hook 'text-mode-hook (lambda () (interactive) (column-marker-3 80)))
-(add-hook 'go-mode-hook (lambda () (interactive) (column-marker-3 80)))
+;;; (use-package column-marker)
+;;; (add-hook 'text-mode-hook (lambda () (interactive) (column-marker-3 80)))
+;;; (add-hook 'go-mode-hook (lambda () (interactive) (column-marker-3 80)))
 
 ;; Spell check
 (add-hook 'text-mode-hook 'flyspell-mode)
