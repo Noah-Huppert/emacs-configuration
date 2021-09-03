@@ -5,8 +5,8 @@ backup
 # Game scores
 games/*-scores
 
-# Shell history
-eshell/history
+# Shell
+eshell/
 transient/
 
 # Desktop sessions, maybe for Wayland??
