@@ -199,6 +199,11 @@ current buffer."
 		(lambda () (linum-mode 0)))
 (setq term-suppress-hard-newline t)
 
+;; VTerm
+;;; Trying out to see how it is
+(use-package vterm
+  :ensure t)
+
 ;; Git integration
 (use-package magit
   :ensure t)
