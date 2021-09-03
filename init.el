@@ -10,23 +10,6 @@
 
 (package-initialize)
 
-;; (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
-;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-
-;; Save all backup files in a dedicated directory
-;; https://stackoverflow.com/a/2680682
-(setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
-      backup-by-copying t    ; Don't delink hardlinks
-      version-control t      ; Use version numbers on backups
-      delete-old-versions t  ; Automatically delete excess backups
-      kept-new-versions 20   ; how many of the newest versions to keep
-      kept-old-versions 5    ; and how many of the old
-      )
-
-;; Place autosave files in dedicated directory
-;; https://www.emacswiki.org/emacs/AutoSave
-(setq backup-directory-alist
-      `(("." . ,(concat user-emacs-directory "backup"))))
 ;; Use Package
 (eval-when-compile
   (require 'use-package))
@@ -35,10 +18,10 @@
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
 
+								; Layout
 ;; Enable syntax highlighting
 (global-font-lock-mode t)
 
-;;; Layout
 ;; Font
 (setq default-frame-alist '((font . "Hack-12")))
 
@@ -46,6 +29,23 @@
 (setq-default tab-width 5)
 
 ;;; Behavior
+								; Behavior
+;; Auto Save
+;;; Save all backup files in a dedicated directory
+;;; https://stackoverflow.com/a/2680682
+(setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
+      backup-by-copying t    ; Don't delink hardlinks
+      version-control t      ; Use version numbers on backups
+      delete-old-versions t  ; Automatically delete excess backups
+      kept-new-versions 20   ; how many of the newest versions to keep
+      kept-old-versions 5    ; and how many of the old
+)
+
+;;; Place autosave files in dedicated directory
+;;; https://www.emacswiki.org/emacs/AutoSave
+(setq backup-directory-alist
+      `(("." . ,(concat user-emacs-directory "backup"))))
+
 ;; C-<return> = Exit search at beginning of match
 (define-key isearch-mode-map [(control return)]
   #'isearch-exit-other-end)
