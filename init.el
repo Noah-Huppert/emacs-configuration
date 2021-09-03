@@ -76,10 +76,10 @@
 (add-hook 'text-mode-hook 'flyspell-mode)
 
 ;; Highlight hex colors
-;;(e-globalized-minor-mode my-global-rainbow-mode rainbow-mode
-;;  (lambda () (rainbow-mode t)))
+(define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
+ (lambda () (rainbow-mode t)))
 
-;;(my-global-rainbow-mode t)
+(my-global-rainbow-mode t)
 
 ;; New line at end of file
 (setq require-final-newline 'visit-save)
