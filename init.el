@@ -24,6 +24,7 @@
 
 ;; Font
 (setq default-frame-alist '((font . "Hack-12")))
+(set-face-attribute 'default nil :height 80)
 
 ;; Tab width
 (setq-default tab-width 5)
