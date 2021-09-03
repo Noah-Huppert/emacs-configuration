@@ -179,7 +179,7 @@ current buffer."
 (setq gc-cons-percentage 0.5)
 (run-with-idle-timer 5 t #'garbage-collect)
 
-;;; Languages
+								; Programming Languages
 ;;Salt state
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
 
