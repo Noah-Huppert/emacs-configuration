@@ -7,9 +7,14 @@ games/*-scores
 
 # Shell history
 eshell/history
+transient/
 
 # Desktop sessions, maybe for Wayland??
 session.*
 
 # Buffer grouping in "projects" metadata file
 projectile-bookmarks.eld
+
+# Image thumbnails
+image-dired/
+thumbs/
