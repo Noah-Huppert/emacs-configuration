@@ -246,11 +246,17 @@ current buffer."
             (when (string-equal "tsx" (file-name-extension buffer-file-name))
               (setup-tide-mode))))
 
+								; Key Bindings
+;; Make M-f to move to the beginning of the next word
+(require 'misc)
+(define-key global-map (kbd "M-f") (lambda ()
+				     (interactive)
+				     (forward-to-word 1)))
 
+;; Make M-F move to end of next word
+(define-key global-map (kbd "M-F") (lambda ()
+				     (interactive)
+				     (forward-word)))
 
-;;; Hide line numbers
-(add-hook 'term-mode-hook
-		(lambda () (linum-mode 0)))
-(setq term-suppress-hard-newline t)
 ;; Org mode agenda
 (define-key org-mode-map (kbd "C-c a") 'org-agenda)
