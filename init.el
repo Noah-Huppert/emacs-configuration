@@ -214,8 +214,6 @@ current buffer."
             (when (string-equal "tsx" (file-name-extension buffer-file-name))
               (setup-tide-mode))))
 
-;; Org mode agenda
-(define-key org-mode-map (kbd "C-c a") 'org-agenda)
 
 ;; Terminal
 ;;; GPG pin entry
@@ -243,3 +241,5 @@ current buffer."
 (add-hook 'term-mode-hook
 		(lambda () (linum-mode 0)))
 (setq term-suppress-hard-newline t)
+;; Org mode agenda
+(define-key org-mode-map (kbd "C-c a") 'org-agenda)
