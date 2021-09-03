@@ -166,9 +166,9 @@ current buffer."
 	  ("s" . "src")))
 
 ;; Organize buffers by project
-(projectile-mode +1)
-(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+;; (projectile-mode +1)
+;; (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+;; (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 ;; Ensure not garbage collecting too quickly
 ;; I found in large org mode files the input lag was very high.
