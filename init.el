@@ -198,6 +198,11 @@ current buffer."
 (add-hook 'term-mode-hook
 		(lambda () (linum-mode 0)))
 (setq term-suppress-hard-newline t)
+;; Git integration
+(use-package magit
+  :ensure t)
+(use-package git-commit
+  :ensure t)
 								; Programming Languages
 ;;Salt state
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
