@@ -29,7 +29,12 @@
 ;; Tab width
 (setq-default tab-width 5)
 
-;;; Behavior
+								; Colors
+;;;(load-theme 'zenburn t)
+;;;(load-theme 'tangotango t)
+(load-theme 'doom-one t)
+;(set-face-foreground 'font-lock-comment-face "green")
+
 								; Behavior
 ;; Auto Save
 ;;; Save all backup files in a dedicated directory
@@ -192,24 +197,6 @@ current buffer."
 
 ;; LaTeX
 (require 'px)
-
-;;; Colors
-;;;(load-theme 'zenburn t)
-;;;(load-theme 'tangotango t)
-(load-theme 'doom-one t)
-;(set-face-foreground 'font-lock-comment-face "green")
-
-;;; Key Bindings
-;; Make M-f to move to the beginning of the next word
-(require 'misc)
-(define-key global-map (kbd "M-f") (lambda ()
-				     (interactive)
-				     (forward-to-word 1)))
-
-;; Make M-F move to end of next word
-(define-key global-map (kbd "M-F") (lambda ()
-				     (interactive)
-				     (forward-word)))
 
 ;; Web development
 (require 'typescript-mode)
