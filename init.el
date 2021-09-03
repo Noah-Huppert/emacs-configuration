@@ -98,8 +98,8 @@
 (global-set-key (kbd "C-x /") 'transpose-frame);(lambda () (interactive) (transpose-frame)))
 
 ;; Auto indent
-(setq auto-indent-on-visit-file t)
-(require 'auto-indent-mode)
+;; (setq auto-indent-on-visit-file t)
+;; (require 'auto-indent-mode)
 
 ;; Rename file
 ;; source: http://steve.yegge.googlepages.com/my-dot-emacs-file
