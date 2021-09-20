@@ -7,9 +7,7 @@
  '(image-dired-append-when-browsing t)
  '(image-dired-thumb-size 100)
  '(package-selected-packages
-   '(magit dired-subtree dired-rainbow dired-avfs dired-hacks use-package vterm yaml-mode auto-complete dap-mode json-mode projectile shell-switcher transpose-frame doom-themes vlf tangotango-theme gitignore-mode protobuf-mode editorconfig rust-mode company-lsp lsp-mode company zenburn-theme web-narrow-mode tide typescript-mode dart-mode terraform-mode web-mode-edit-element vue-mode python-mode dockerfile-mode elixir-mode ## go-mode markdown-mode+ rainbow-mode popup paradox markdown-mode helm-core))
- '(projectile-mode t nil (projectile))
- '(size-indication-mode t))
+   '(markdown-mode gitignore-mode gitconfig-mode gitattributes-mode web-mode vterm use-package transpose-frame tide shell-switcher rainbow-mode px projectile org-bullets magit helm go-mode editorconfig doom-themes dired-subtree dired-avfs)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
