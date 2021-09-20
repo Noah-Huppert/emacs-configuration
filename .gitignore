@@ -15,19 +15,15 @@ session.*
 # Buffer grouping in "projects" metadata file
 projectile-bookmarks.eld
 
+# Buffer bookmarks
+bookmarks
+
+# Packages
+elpa/
+
+# Misc files which changes
+transient/
+
 # Image thumbnails
 image-dired/
 thumbs/
-
-# Package metadata
-elpa/archives/
-
-# As packages are slowly migrated to use-package they are manually git-ignored here for a bit
-elpa/dired-subtree-20210105.1127/
-elpa/dired-avfs-20161012.1104/
-elpa/dired-hacks-utils-20201005.2318/
-elpa/dired-rainbow-20190722.1109/
-/elpa/magit-20210902.2007/
-/elpa/magit-section-20210829.1849/
-/elpa/vterm-20210804.405/
-/elpa/with-editor-20210524.1654/

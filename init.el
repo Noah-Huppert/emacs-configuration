@@ -1,6 +1,14 @@
-								; Plugins
+								; Emacs Core
+(message "---------- NEW init.el LOAD ----------")
+
 ;; Local plugins
 (add-to-list 'load-path "~/.emacs.d/lisp")
+(setq machine-specific-file
+	 (concat
+	  (expand-file-name "~/.emacs.d/machines/")
+	  (concat (system-name) ".el")))
+(if (file-exists-p machine-specific-file) 
+    (load machine-specific-file))
 
 ;; Built in package manager
 (require 'package)
@@ -14,17 +22,12 @@
 (eval-when-compile
   (require 'use-package))
 
-;; Place customize files in seperate file
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
-
-								; Layout
 ;; Enable syntax highlighting
 (global-font-lock-mode t)
 
 ;; Font
 (setq default-frame-alist '((font . "Hack-12")))
-(set-face-attribute 'default nil :height 80)
+(if (boundp 'my-font-size) (set-face-attribute 'default nil :height my-font-size))
 
 ;; Tab width
 (setq-default tab-width 5)
@@ -32,7 +35,10 @@
 								; Colors
 ;;;(load-theme 'zenburn t)
 ;;;(load-theme 'tangotango t)
-(load-theme 'doom-one t)
+(use-package doom-themes
+  :ensure t
+  :config
+  (load-theme 'doom-one t))
 ;(set-face-foreground 'font-lock-comment-face "green")
 
 								; Behavior
@@ -62,6 +68,8 @@
   (goto-char isearch-other-end))
 
 ;; Editor config
+(use-package editorconfig
+  :ensure t)
 (editorconfig-mode 1)
 
 ;; Line numbers
@@ -76,6 +84,8 @@
 (add-hook 'text-mode-hook 'flyspell-mode)
 
 ;; Highlight hex colors
+(use-package rainbow-mode
+  :ensure t)
 (define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
  (lambda () (rainbow-mode t)))
 
@@ -95,7 +105,9 @@
 (global-set-key (kbd "C-x <right>") 'windmove-right)
 
 ;; Transpose split windows
-(global-set-key (kbd "C-x /") 'transpose-frame);(lambda () (interactive) (transpose-frame)))
+(use-package transpose-frame
+  :ensure t
+  :bind ("C-x /" . transpose-frame))
 
 ;; Auto indent
 ;; (setq auto-indent-on-visit-file t)
@@ -142,19 +154,8 @@ current buffer."
 (add-hook 'ielm-mode-hook 'eldoc-mode)
 
 ;; Org mode
-;; (setq org-agenda-files (list (expand-file-name "~/documents/notebook.org")))
-(setq org-agenda-files
-	 (mapcar 'expand-file-name
-		    (list
-			"~/documents/planner.org"
-			"~/documents/school/y5/afroam/afroam-133/planner.org"
-			"~/documents/school/y5/afroam/afroam-133/lectures.org"
-			"~/documents/school/y5/afroam/afroam-133/reading.org"
-			"~/documents/school/y5/cs/cs-alligator/planner.org"
-			"~/documents/school/y5/cs/cs-370/planner.org"
-			"~/documents/school/y5/spanish/spanish-240/planner.org"
-			"~/documents/school/y5/cs/cics-305/planner.org" 
-			"~/documents/school/y5/cs/cs-590a/planner.org")))
+(if (boundp 'my-org-agenda-files)
+    (setq org-agenda-files (mapcar 'expand-file-name my-org-agenda-files)))
 (setq org-todo-keywords
 	 '((sequence "TODO" "DOING" "PAUSED" "|" "DONE" "ABANDONED")))
 
@@ -165,10 +166,30 @@ current buffer."
 	  ("i" . "index")
 	  ("s" . "src")))
 
+(use-package org-bullets
+  :ensure t
+  :custom
+  (inhibit-compacting-font-caches t) ; https://github.com/integral-dw/org-bullets#this-mode-causes-significant-slowdown
+  :hook (org-mode . org-bullets-mode))
+
+;; Git
+;;; Magit extension
+(use-package magit
+  :ensure t
+  :bind (:map magit-file-section-map
+              ("RET" . magit-diff-visit-file-other-window)
+              :map magit-hunk-section-map
+              ("RET" . magit-diff-visit-file-other-window))
+  :custom
+  (ediff-window-setup-function 'ediff-setup-windows-plain) ; Make ediff navigation window not open in new window
+  )
+
 ;; Organize buffers by project
-;; (projectile-mode +1)
-;; (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-;; (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(use-package projectile
+  :ensure t)
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 ;; Ensure not garbage collecting too quickly
 ;;; I found in large org mode files the input lag was very high. After googling I found out that this is bc Emacs was garbage collecting after every keystroke. This Reddit post suggested setting a minimum time of 5 seconds between gc rounds and setting a higher memory cap.
@@ -180,8 +201,13 @@ current buffer."
 (run-with-idle-timer 5 t #'garbage-collect)
 
 ;; Terminal
+;;; Terminal shortcut
 (defun my-term () (interactive) (ansi-term (substitute-env-vars "$SHELL")))
 (global-set-key (kbd "C-c C-<return>") 'my-term)
+
+;;; VTerm
+(use-package vterm
+  :ensure t)
 
 ;;; Kill buffer when inferior shell exits
 ;;; From: https://stackoverflow.com/a/23691628
@@ -190,9 +216,11 @@ current buffer."
 (kill-buffer))
  
 ;;; Shell management
-(require 'shell-switcher)
-(setq shell-switcher-mode t)
-(setq-default shell-switcher-new-shell-function 'my-term)
+(use-package shell-switcher
+  :ensure t
+  :custom
+  (shell-switcher-mode t)
+  (shell-switcher-new-shell-function 'my-term))
 
 ;;; Hide line numbers
 (add-hook 'term-mode-hook
@@ -214,24 +242,37 @@ current buffer."
 (use-package dired-subtree
   :ensure t)
 
+;; Helm
+(use-package helm
+  :ensure t
+  :bind ("M-x" . helm-M-x))
+
 								; Programming Languages
 ;;Salt state
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
 
 ;; Markdown
+(use-package markdown-mode
+  :ensure t)
 (setq markdown-command "/bin/pandoc")
 
 ;; Go
-(autoload 'go-mode "go-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
-(add-hook 'before-save-hook #'gofmt-before-save)
+(use-package go-mode
+  :ensure t
+  :mode ("\\.go\\'" . go-mode)
+  :init
+  (add-hook 'before-save-hook #'gofmt-before-save))
 
 ;; LaTeX
-(require 'px)
+;;; Preview Latex inline
+(use-package px
+  :ensure t)
 
 ;; Web development
-(require 'typescript-mode)
-(require 'tide)
+(use-package typescript-mode
+  :ensure t)
+(use-package tide
+  :ensure t)
 
 (defun setup-tide-mode ()
   (interactive)
@@ -239,15 +280,27 @@ current buffer."
   (company-mode +1) ; Auto complete
   (tide-setup))
 
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+(use-package web-mode
+  :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+  :hook (web-mode .
+			   (lambda ()
+				(when (string-equal "tsx" (file-name-extension buffer-file-name))
+				  (setup-tide-mode))))
+  :custom
+  (web-mode-enable-auto-quoting nil) ; Disable auto-quoting
+  )
 
-(add-hook 'web-mode-hook
-          (lambda ()
-            (when (string-equal "tsx" (file-name-extension buffer-file-name))
-              (setup-tide-mode))))
+;; Git config files
+(use-package gitattributes-mode
+  :ensure t)
+(use-package gitconfig-mode
+  :ensure t)
+(use-package gitignore-mode
+  :ensure t)
 
 								; Key Bindings
 ;; Make M-f to move to the beginning of the next word
@@ -263,3 +316,10 @@ current buffer."
 
 ;; Org mode agenda
 (define-key org-mode-map (kbd "C-c a") 'org-agenda)
+
+
+								; Customize
+;; Place customize files in seperate file
+;; Intentionally last so that use-package can install anything required by these customizations.
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
