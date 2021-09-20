@@ -242,6 +242,11 @@ current buffer."
 (use-package dired-subtree
   :ensure t)
 
+;; Helm
+(use-package helm
+  :ensure t
+  :bind ("M-x" . helm-M-x))
+
 								; Programming Languages
 ;;Salt state
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
@@ -285,10 +290,6 @@ current buffer."
   (web-mode-enable-auto-quoting nil) ; Disable auto-quoting
   )
 
-;; Helm
-(use-package helm
-  :ensure t
-  :bind ("M-x" . helm-M-x))
 
 ;; Speedbar
 (use-package sr-speedbar
