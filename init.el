@@ -215,7 +215,10 @@ current buffer."
 ;;; Colors
 ;;;(load-theme 'zenburn t)
 ;;;(load-theme 'tangotango t)
-(load-theme 'doom-one t)
+(use-package doom-themes
+  :ensure t
+  :config
+  (load-theme 'doom-one t))
 ;(set-face-foreground 'font-lock-comment-face "green")
 
 ;;; Key Bindings
