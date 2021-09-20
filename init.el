@@ -84,6 +84,8 @@
 (add-hook 'text-mode-hook 'flyspell-mode)
 
 ;; Highlight hex colors
+(use-package rainbow-mode
+  :ensure t)
 (define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
  (lambda () (rainbow-mode t)))
 
