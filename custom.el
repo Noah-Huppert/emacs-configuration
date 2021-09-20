@@ -4,6 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(dired-hide-details-hide-information-lines t)
+ '(helm-mode t)
  '(image-dired-append-when-browsing t)
  '(image-dired-thumb-size 100)
  '(package-selected-packages

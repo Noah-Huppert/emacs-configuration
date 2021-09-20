@@ -245,9 +245,13 @@ current buffer."
 ;; Helm
 (use-package helm
   :ensure t
-  :bind ("M-x" . helm-M-x))
+  :bind ("M-x" . helm-M-x)
+  :bind ("C-x C-f" . helm-find-files)
+  :config
+  (helm-mode 1))
 
 								; Programming Languages
+
 ;;Salt state
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
 
@@ -301,6 +305,9 @@ current buffer."
   :ensure t)
 (use-package gitignore-mode
   :ensure t)
+
+;; Foreman Procfile
+(add-to-list 'auto-mode-alist '("\\Procfile\\'" . conf-mode))
 
 								; Key Bindings
 ;; Make M-f to move to the beginning of the next word
