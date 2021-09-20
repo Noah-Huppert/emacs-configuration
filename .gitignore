@@ -16,3 +16,6 @@ projectile-bookmarks.eld
 
 # Buffer bookmarks
 bookmarks
+
+# Packages
+elpa/
