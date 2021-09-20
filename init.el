@@ -252,6 +252,8 @@ current buffer."
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
 
 ;; Markdown
+(use-package markdown-mode
+  :ensure t)
 (setq markdown-command "/bin/pandoc")
 
 ;; Go
