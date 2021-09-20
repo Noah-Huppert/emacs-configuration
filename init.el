@@ -161,6 +161,19 @@ current buffer."
   :custom
   (inhibit-compacting-font-caches t) ; https://github.com/integral-dw/org-bullets#this-mode-causes-significant-slowdown
   :hook (org-mode . org-bullets-mode))
+
+;; Git
+;;; Magit extension
+(use-package magit
+  :ensure t
+  :bind (:map magit-file-section-map
+              ("RET" . magit-diff-visit-file-other-window)
+              :map magit-hunk-section-map
+              ("RET" . magit-diff-visit-file-other-window))
+  :custom
+  (ediff-window-setup-function 'ediff-setup-windows-plain) ; Make ediff navigation window not open in new window
+  )
+
 ;; Organize buffers by project
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
