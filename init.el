@@ -294,14 +294,6 @@ current buffer."
   (web-mode-enable-auto-quoting nil) ; Disable auto-quoting
   )
 
-
-;; Speedbar
-(use-package sr-speedbar
-  :ensure t
-  :init
-  (add-hook 'speedbar-mode-hook (lambda () (setq truncate-lines nil))) ; Don't truncate file names in speedbar buffer
-  )
-
 ;; Place customize files in seperate file
 ;; Intentionally last so that use-package can install anything required by these customizations.
 (setq custom-file "~/.emacs.d/custom.el")
