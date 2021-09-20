@@ -144,9 +144,8 @@ current buffer."
 (add-hook 'ielm-mode-hook 'eldoc-mode)
 
 ;; Org mode
-								;(setq org-agenda-files (list (expand-file-name "~/documents/notebook.org")))
-(setq org-agenda-files
-	 (mapcar 'expand-file-name my-org-agenda-files))
+(if (boundp 'my-org-agenda-files)
+    (setq org-agenda-files (mapcar 'expand-file-name my-org-agenda-files)))
 (setq org-todo-keywords
 	 '((sequence "TODO" "DOING" "PAUSED" "|" "DONE" "ABANDONED")))
 
