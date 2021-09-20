@@ -1,3 +1,6 @@
+;; Font size within Emacs
+(setq my-font-size 80)
+
 ;; Location of Org mode agenda files on this machine
 (setq my-org-agenda-files
 	 (list
