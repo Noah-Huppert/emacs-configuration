@@ -12,8 +12,6 @@
 
 ;; Built in package manager
 (require 'package)
-(eval-when-compile
-  (require 'use-package))
 
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
