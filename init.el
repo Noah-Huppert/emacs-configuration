@@ -277,9 +277,11 @@ current buffer."
 (defun my-term () (interactive) (ansi-term (substitute-env-vars "$SHELL")))
 
 ;;; Shell management
-(require 'shell-switcher)
-(setq shell-switcher-mode t)
-(setq-default shell-switcher-new-shell-function 'my-term)
+(use-package shell-switcher
+  :ensure t
+  :custom
+  (shell-switcher-mode t)
+  (shell-switcher-new-shell-function 'my-term))
 
 ;;; Hide line numbers
 (add-hook 'term-mode-hook
