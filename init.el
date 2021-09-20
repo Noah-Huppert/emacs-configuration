@@ -40,10 +40,6 @@
 (setq backup-directory-alist
       `(("." . ,(concat user-emacs-directory "backup"))))
 
-;; Place customize files in seperate file
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
-
 ;; Enable syntax highlighting
 (global-font-lock-mode t)
 
@@ -289,3 +285,7 @@ current buffer."
 (use-package helm
   :ensure t
   :bind ("M-x" . helm-M-x))
+;; Place customize files in seperate file
+;; Intentionally last so that use-package can install anything required by these customizations.
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
