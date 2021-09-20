@@ -232,8 +232,10 @@ current buffer."
 				     (forward-word)))
 
 ;; Web development
-(require 'typescript-mode)
-(require 'tide)
+(use-package typescript-mode
+  :ensure t)
+(use-package tide
+  :ensure t)
 
 (defun setup-tide-mode ()
   (interactive)
@@ -241,15 +243,19 @@ current buffer."
   (company-mode +1) ; Auto complete
   (tide-setup))
 
-(require 'web-mode)
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
-
-(add-hook 'web-mode-hook
-          (lambda ()
-            (when (string-equal "tsx" (file-name-extension buffer-file-name))
-              (setup-tide-mode))))
+(use-package web-mode
+  :ensure t
+  :init
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+  :hook (web-mode .
+			   (lambda ()
+				(when (string-equal "tsx" (file-name-extension buffer-file-name))
+				  (setup-tide-mode))))
+  :custom
+  (web-mode-enable-auto-quoting nil) ; Disable auto-quoting
+  )
 
 ;; Org mode agenda
 (define-key org-mode-map (kbd "C-c a") 'org-agenda)
