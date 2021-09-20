@@ -13,3 +13,6 @@ session.*
 
 # Buffer grouping in "projects" metadata file
 projectile-bookmarks.eld
+
+# Buffer bookmarks
+bookmarks
