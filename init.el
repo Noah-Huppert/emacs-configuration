@@ -96,7 +96,9 @@
 (global-set-key (kbd "C-x <right>") 'windmove-right)
 
 ;; Transpose split windows
-(global-set-key (kbd "C-x /") 'transpose-frame);(lambda () (interactive) (transpose-frame)))
+(use-package transpose-frame
+  :ensure t
+  :bind ("C-x /" . transpose-frame))
 
 ;; Auto indent
 (setq auto-indent-on-visit-file t)
