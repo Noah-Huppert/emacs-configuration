@@ -146,17 +146,7 @@ current buffer."
 ;; Org mode
 								;(setq org-agenda-files (list (expand-file-name "~/documents/notebook.org")))
 (setq org-agenda-files
-	 (mapcar 'expand-file-name
-		    (list
-			"~/documents/planner.org"
-			"~/documents/school/y5/afroam/afroam-133/planner.org"
-			"~/documents/school/y5/afroam/afroam-133/lectures.org"
-			"~/documents/school/y5/afroam/afroam-133/reading.org"
-			"~/documents/school/y5/cs/cs-alligator/planner.org"
-			"~/documents/school/y5/cs/cs-370/planner.org"
-			"~/documents/school/y5/spanish/spanish-240/planner.org"
-			"~/documents/school/y5/cs/cics-305/planner.org" 
-			"~/documents/school/y5/cs/cs-590a/planner.org")))
+	 (mapcar 'expand-file-name my-org-agenda-files))
 (setq org-todo-keywords
 	 '((sequence "TODO" "DOING" "PAUSED" "|" "DONE" "ABANDONED")))
 
