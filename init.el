@@ -192,6 +192,12 @@ current buffer."
 (setq gc-cons-percentage 0.5)
 (run-with-idle-timer 5 t #'garbage-collect)
 
+;; Speedbar
+(use-package sr-speedbar
+  :init
+  (add-hook 'speedbar-mode-hook (lambda () (setq truncate-lines nil))) ; Don't truncate file names in speedbar buffer
+  )
+
 ;;; Languages
 ;;Salt state
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
