@@ -203,9 +203,11 @@ current buffer."
 (setq markdown-command "/bin/pandoc")
 
 ;; Go
-(autoload 'go-mode "go-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.go\\'" . go-mode))
-(add-hook 'before-save-hook #'gofmt-before-save)
+(use-package go-mode
+  :ensure t
+  :mode ("\\.go\\'" . go-mode)
+  :init
+  (add-hook 'before-save-hook #'gofmt-before-save))
 
 ;; LaTeX
 (require 'px)
