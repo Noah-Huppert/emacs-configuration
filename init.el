@@ -269,8 +269,7 @@ current buffer."
 ;;; From: https://stackoverflow.com/a/23691628
 (defadvice term-handle-exit
   (after term-kill-buffer-on-exit activate)
-(kill-buffer))
- 
+  (kill-buffer))
 ;;; Shell management
 (require 'shell-switcher)
 (setq shell-switcher-mode t)
