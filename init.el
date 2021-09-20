@@ -270,6 +270,10 @@ current buffer."
 (defadvice term-handle-exit
   (after term-kill-buffer-on-exit activate)
   (kill-buffer))
+
+;;; Shell shortcut
+(defun my-term () (interactive) (ansi-term (substitute-env-vars "$SHELL")))
+
 ;;; Shell management
 (require 'shell-switcher)
 (setq shell-switcher-mode t)
