@@ -305,6 +305,9 @@ current buffer."
 (use-package gitignore-mode
   :ensure t)
 
+;; Foreman Procfile
+(add-to-list 'auto-mode-alist '("\\Procfile\\'" . conf-mode))
+
 								; Key Bindings
 ;; Make M-f to move to the beginning of the next word
 (require 'misc)
