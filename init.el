@@ -246,6 +246,7 @@ current buffer."
 (use-package helm
   :ensure t
   :bind ("M-x" . helm-M-x)
+  :bind ("C-x C-f" . helm-find-files)
   :config
   (helm-mode 1))
 
