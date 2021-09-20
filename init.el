@@ -245,9 +245,12 @@ current buffer."
 ;; Helm
 (use-package helm
   :ensure t
-  :bind ("M-x" . helm-M-x))
+  :bind ("M-x" . helm-M-x)
+  :config
+  (helm-mode 1))
 
 								; Programming Languages
+
 ;;Salt state
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
 
