@@ -1,6 +1,6 @@
-;;
-(message "---------- NEW init.el LOAD ----------")
 								; Emacs Core
+(message "---------- NEW init.el LOAD ----------")
+
 ;; Local plugins
 (add-to-list 'load-path "~/.emacs.d/lisp")
 (setq machine-specific-file
@@ -10,47 +10,56 @@
 (if (file-exists-p machine-specific-file) 
     (load machine-specific-file))
 
-;; Initialize package manager
+;; Built in package manager
 (require 'package)
 (eval-when-compile
   (require 'use-package))
 
 (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
 
-;; (setq package-enable-at-startup nil)
-;; (package-refresh-contents)
 (package-initialize)
 
-;; (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
-;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; Use Package
+(eval-when-compile
+  (require 'use-package))
 
-;; Save all backup files in a dedicated directory
-;; https://stackoverflow.com/a/2680682
+;; Enable syntax highlighting
+(global-font-lock-mode t)
+
+;; Font
+(setq default-frame-alist '((font . "Hack-12")))
+(set-face-attribute 'default nil :height 80)
+
+;; Tab width
+(setq-default tab-width 5)
+
+								; Colors
+;;;(load-theme 'zenburn t)
+;;;(load-theme 'tangotango t)
+(use-package doom-themes
+  :ensure t
+  :config
+  (load-theme 'doom-one t))
+;(set-face-foreground 'font-lock-comment-face "green")
+
+								; Behavior
+;; Auto Save
+;;; Save all backup files in a dedicated directory
+;;; https://stackoverflow.com/a/2680682
 (setq backup-directory-alist '(("." . "~/.emacs.d/backup"))
       backup-by-copying t    ; Don't delink hardlinks
       version-control t      ; Use version numbers on backups
       delete-old-versions t  ; Automatically delete excess backups
       kept-new-versions 20   ; how many of the newest versions to keep
       kept-old-versions 5    ; and how many of the old
-      )
+)
 
-;; Place autosave files in dedicated directory
-;; https://www.emacswiki.org/emacs/AutoSave
+;;; Place autosave files in dedicated directory
+;;; https://www.emacswiki.org/emacs/AutoSave
 (setq backup-directory-alist
       `(("." . ,(concat user-emacs-directory "backup"))))
 
-;; Enable syntax highlighting
-(global-font-lock-mode t)
-
-;;; Layout
-;; Font
-(setq default-frame-alist '((font . "Hack-12")))
-
-;; Tab width
-(setq-default tab-width 5)
-
-;;; Behavior
 ;; C-<return> = Exit search at beginning of match
 (define-key isearch-mode-map [(control return)]
   #'isearch-exit-other-end)
@@ -69,18 +78,18 @@
 (global-linum-mode)
 
 ;; Max line length
-(require 'column-marker)
-(add-hook 'text-mode-hook (lambda () (interactive) (column-marker-3 80)))
-(add-hook 'go-mode-hook (lambda () (interactive) (column-marker-3 80)))
+;;; (use-package column-marker)
+;;; (add-hook 'text-mode-hook (lambda () (interactive) (column-marker-3 80)))
+;;; (add-hook 'go-mode-hook (lambda () (interactive) (column-marker-3 80)))
 
 ;; Spell check
 (add-hook 'text-mode-hook 'flyspell-mode)
 
 ;; Highlight hex colors
-;;(e-globalized-minor-mode my-global-rainbow-mode rainbow-mode
-;;  (lambda () (rainbow-mode t)))
+(define-globalized-minor-mode my-global-rainbow-mode rainbow-mode
+ (lambda () (rainbow-mode t)))
 
-;;(my-global-rainbow-mode t)
+(my-global-rainbow-mode t)
 
 ;; New line at end of file
 (setq require-final-newline 'visit-save)
@@ -101,8 +110,8 @@
   :bind ("C-x /" . transpose-frame))
 
 ;; Auto indent
-(setq auto-indent-on-visit-file t)
-(require 'auto-indent-mode)
+;; (setq auto-indent-on-visit-file t)
+;; (require 'auto-indent-mode)
 
 ;; Rename file
 ;; source: http://steve.yegge.googlepages.com/my-dot-emacs-file
@@ -183,19 +192,57 @@ current buffer."
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 
 ;; Ensure not garbage collecting too quickly
-;; I found in large org mode files the input lag was very high.
-;; After googling I found out that this is bc Emacs was garbage
-;; collecting after every keystroke. This Reddit post suggested
-;; setting a minimum time of 5 seconds between gc rounds and
-;; setting a higher memory cap.
-;; Original googled Reddit post: https://www.reddit.com/r/emacs/comments/6uhzc9/very_slow_org_mode/
-;; Linked to this comment: https://www.reddit.com/r/emacs/comments/6uhzc9/very_slow_org_mode/dlwyzmg/
-;; Links to this og Reddit post: https://www.reddit.com/r/emacs/comments/55ork0/is_emacs_251_noticeably_slower_than_245_on_windows/d8cmm7v/
+;;; I found in large org mode files the input lag was very high. After googling I found out that this is bc Emacs was garbage collecting after every keystroke. This Reddit post suggested setting a minimum time of 5 seconds between gc rounds and setting a higher memory cap.
+;;; Original googled Reddit post: https://www.reddit.com/r/emacs/comments/6uhzc9/very_slow_org_mode/
+;;; Linked to this comment: https://www.reddit.com/r/emacs/comments/6uhzc9/very_slow_org_mode/dlwyzmg/
+;;; Links to this og Reddit post: https://www.reddit.com/r/emacs/comments/55ork0/is_emacs_251_noticeably_slower_than_245_on_windows/d8cmm7v/
 (setq gc-cons-threshold (* 511 1024 1024))
 (setq gc-cons-percentage 0.5)
 (run-with-idle-timer 5 t #'garbage-collect)
 
-;;; Languages
+;; Terminal
+;;; Terminal shortcut
+(defun my-term () (interactive) (ansi-term (substitute-env-vars "$SHELL")))
+(global-set-key (kbd "C-c C-<return>") 'my-term)
+
+;;; VTerm
+(use-package vterm
+  :ensure t)
+
+;;; Kill buffer when inferior shell exits
+;;; From: https://stackoverflow.com/a/23691628
+(defadvice term-handle-exit
+  (after term-kill-buffer-on-exit activate)
+(kill-buffer))
+ 
+;;; Shell management
+(use-package shell-switcher
+  :ensure t
+  :custom
+  (shell-switcher-mode t)
+  (shell-switcher-new-shell-function 'my-term))
+
+;;; Hide line numbers
+(add-hook 'term-mode-hook
+		(lambda () (linum-mode 0)))
+(setq term-suppress-hard-newline t)
+
+;; VTerm
+;;; Trying out to see how it is
+(use-package vterm
+  :ensure t)
+
+;; Git integration
+(use-package magit
+  :ensure t)
+
+;; Dired
+(use-package dired-avfs
+  :ensure t)
+(use-package dired-subtree
+  :ensure t)
+
+								; Programming Languages
 ;;Salt state
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
 
@@ -211,27 +258,6 @@ current buffer."
 
 ;; LaTeX
 (require 'px)
-
-;;; Colors
-;;;(load-theme 'zenburn t)
-;;;(load-theme 'tangotango t)
-(use-package doom-themes
-  :ensure t
-  :config
-  (load-theme 'doom-one t))
-;(set-face-foreground 'font-lock-comment-face "green")
-
-;;; Key Bindings
-;; Make M-f to move to the beginning of the next word
-(require 'misc)
-(define-key global-map (kbd "M-f") (lambda ()
-				     (interactive)
-				     (forward-to-word 1)))
-
-;; Make M-F move to end of next word
-(define-key global-map (kbd "M-F") (lambda ()
-				     (interactive)
-				     (forward-word)))
 
 ;; Web development
 (use-package typescript-mode
@@ -259,35 +285,6 @@ current buffer."
   (web-mode-enable-auto-quoting nil) ; Disable auto-quoting
   )
 
-;; Org mode agenda
-(define-key org-mode-map (kbd "C-c a") 'org-agenda)
-
-;; Terminal
-;;; VTerm
-(use-package vterm
-  :ensure t)
-
-;;; Kill buffer when inferior shell exits
-;;; From: https://stackoverflow.com/a/23691628
-(defadvice term-handle-exit
-  (after term-kill-buffer-on-exit activate)
-  (kill-buffer))
-
-;;; Shell shortcut
-(defun my-term () (interactive) (ansi-term (substitute-env-vars "$SHELL")))
-
-;;; Shell management
-(use-package shell-switcher
-  :ensure t
-  :custom
-  (shell-switcher-mode t)
-  (shell-switcher-new-shell-function 'my-term))
-
-;;; Hide line numbers
-(add-hook 'term-mode-hook
-		(lambda () (linum-mode 0)))
-(setq term-suppress-hard-newline t)
-
 ;; Helm
 (use-package helm
   :ensure t
@@ -304,3 +301,18 @@ current buffer."
 ;; Intentionally last so that use-package can install anything required by these customizations.
 (setq custom-file "~/.emacs.d/custom.el")
 (load custom-file)
+
+								; Key Bindings
+;; Make M-f to move to the beginning of the next word
+(require 'misc)
+(define-key global-map (kbd "M-f") (lambda ()
+				     (interactive)
+				     (forward-to-word 1)))
+
+;; Make M-F move to end of next word
+(define-key global-map (kbd "M-F") (lambda ()
+				     (interactive)
+				     (forward-word)))
+
+;; Org mode agenda
+(define-key org-mode-map (kbd "C-c a") 'org-agenda)
