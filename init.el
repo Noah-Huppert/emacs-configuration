@@ -2,6 +2,7 @@
 								; Emacs Core
 ;; Local plugins
 (add-to-list 'load-path "~/.emacs.d/lisp")
+(if (string= "metis" system-name) (load "~/.emacs.d/work.el"))
 
 ;; Initialize package manager
 (require 'package)
