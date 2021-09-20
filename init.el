@@ -156,6 +156,11 @@ current buffer."
 	  ("i" . "index")
 	  ("s" . "src")))
 
+(use-package org-bullets
+  :ensure t
+  :custom
+  (inhibit-compacting-font-caches t) ; https://github.com/integral-dw/org-bullets#this-mode-causes-significant-slowdown
+  :hook (org-mode . org-bullets-mode))
 ;; Organize buffers by project
 (projectile-mode +1)
 (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
