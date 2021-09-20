@@ -283,3 +283,8 @@ current buffer."
 (add-hook 'term-mode-hook
 		(lambda () (linum-mode 0)))
 (setq term-suppress-hard-newline t)
+
+;; Helm
+(use-package helm
+  :ensure t
+  :bind ("M-x" . helm-M-x))
