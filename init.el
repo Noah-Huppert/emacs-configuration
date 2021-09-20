@@ -61,6 +61,8 @@
   (goto-char isearch-other-end))
 
 ;; Editor config
+(use-package editorconfig
+  :ensure t)
 (editorconfig-mode 1)
 
 ;; Line numbers
