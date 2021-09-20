@@ -195,12 +195,6 @@ current buffer."
 (setq gc-cons-percentage 0.5)
 (run-with-idle-timer 5 t #'garbage-collect)
 
-;; Speedbar
-(use-package sr-speedbar
-  :init
-  (add-hook 'speedbar-mode-hook (lambda () (setq truncate-lines nil))) ; Don't truncate file names in speedbar buffer
-  )
-
 ;;; Languages
 ;;Salt state
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
@@ -291,6 +285,14 @@ current buffer."
 (use-package helm
   :ensure t
   :bind ("M-x" . helm-M-x))
+
+;; Speedbar
+(use-package sr-speedbar
+  :ensure t
+  :init
+  (add-hook 'speedbar-mode-hook (lambda () (setq truncate-lines nil))) ; Don't truncate file names in speedbar buffer
+  )
+
 ;; Place customize files in seperate file
 ;; Intentionally last so that use-package can install anything required by these customizations.
 (setq custom-file "~/.emacs.d/custom.el")
