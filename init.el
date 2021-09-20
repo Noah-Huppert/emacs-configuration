@@ -264,7 +264,9 @@ current buffer."
   (add-hook 'before-save-hook #'gofmt-before-save))
 
 ;; LaTeX
-(require 'px)
+;;; Preview Latex inline
+(use-package px
+  :ensure t)
 
 ;; Web development
 (use-package typescript-mode
