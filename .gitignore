@@ -19,3 +19,6 @@ bookmarks
 
 # Packages
 elpa/
+
+# Misc files which changes
+transient/
