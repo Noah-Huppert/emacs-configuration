@@ -263,3 +263,7 @@ current buffer."
 
 ;; Org mode agenda
 (define-key org-mode-map (kbd "C-c a") 'org-agenda)
+
+;; Rest client
+(use-package restclient
+  :ensure t)
