@@ -261,6 +261,9 @@ current buffer."
 (define-key org-mode-map (kbd "C-c a") 'org-agenda)
 
 ;; Terminal
+;;; VTerm
+(use-package vterm
+  :ensure t)
 
 ;;; Kill buffer when inferior shell exits
 ;;; From: https://stackoverflow.com/a/23691628
