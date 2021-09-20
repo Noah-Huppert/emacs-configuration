@@ -294,10 +294,6 @@ current buffer."
   (web-mode-enable-auto-quoting nil) ; Disable auto-quoting
   )
 
-;; Place customize files in seperate file
-;; Intentionally last so that use-package can install anything required by these customizations.
-(setq custom-file "~/.emacs.d/custom.el")
-(load custom-file)
 
 								; Key Bindings
 ;; Make M-f to move to the beginning of the next word
@@ -313,3 +309,10 @@ current buffer."
 
 ;; Org mode agenda
 (define-key org-mode-map (kbd "C-c a") 'org-agenda)
+
+
+								; Customize
+;; Place customize files in seperate file
+;; Intentionally last so that use-package can install anything required by these customizations.
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file)
