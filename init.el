@@ -294,6 +294,13 @@ current buffer."
   (web-mode-enable-auto-quoting nil) ; Disable auto-quoting
   )
 
+;; Git config files
+(use-package gitattributes-mode
+  :ensure t)
+(use-package gitconfig-mode
+  :ensure t)
+(use-package gitignore-mode
+  :ensure t)
 
 								; Key Bindings
 ;; Make M-f to move to the beginning of the next word
