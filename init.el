@@ -242,6 +242,13 @@ current buffer."
 (use-package dired-subtree
   :ensure t)
 
+;; Language server protocol support
+(use-package lsp-mode
+  :ensure t
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :commands lsp)
+
 ;; Helm
 (use-package helm
   :ensure t
@@ -249,6 +256,9 @@ current buffer."
   :bind ("C-x C-f" . helm-find-files)
   :config
   (helm-mode 1))
+(use-package helm-lsp
+  :ensure t
+  :bind (:map lsp-mode-map ([remap xref-find-apropos] . helm-lsp-workspace-symbol)))
 
 								; Programming Languages
 
