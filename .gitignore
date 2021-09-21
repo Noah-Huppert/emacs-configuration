@@ -27,3 +27,7 @@ transient/
 # Image thumbnails
 image-dired/
 thumbs/
+
+# LSP
+/.cache/
+/.lsp-session-v1
