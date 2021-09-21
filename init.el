@@ -270,6 +270,11 @@ current buffer."
   :ensure t
   :config (helm-projectile-on))
 
+;; Writeable grep buffer
+(use-package wgrep
+  :ensure t
+  :config (use-package wgrep-helm :ensure t))
+
 ;; Rest client
 (use-package restclient
   :ensure t)
