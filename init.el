@@ -255,6 +255,16 @@ current buffer."
   :ensure t
   :bind ("C-s" . helm-swoop))
 
+;; Language server protocol
+(use-package lsp-mode
+  :ensure t
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :commands lsp)
+(use-package helm-lsp
+  :ensure t
+  :commands helm-lsp-workspace-symbol)
+
 								; Programming Languages
 
 ;; YAML
