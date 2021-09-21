@@ -31,3 +31,6 @@ thumbs/
 # LSP
 /.cache/
 /.lsp-session-v1
+
+# Helm Google search
+/url/

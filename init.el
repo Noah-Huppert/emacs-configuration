@@ -13,7 +13,7 @@
 ;; Built in package manager
 (require 'package)
 
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/"))
 
 (package-initialize)
@@ -149,9 +149,9 @@ current buffer."
 ;; (add-hook 'go-mode-hook 'lsp-mode)
 
 ;; Show function arguments on hover
-(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-(add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
-(add-hook 'ielm-mode-hook 'eldoc-mode)
+;; (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+;; (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
+;; (add-hook 'ielm-mode-hook 'eldoc-mode)
 
 ;; Org mode
 (if (boundp 'my-org-agenda-files)
@@ -254,13 +254,23 @@ current buffer."
   :ensure t
   :bind ("M-x" . helm-M-x)
   :bind ("C-x C-f" . helm-find-files)
-  :config
-  (helm-mode 1))
+  :bind ("C-z" . helm-execute-persistent-action)
+  :config (helm-mode 1)
+  :custom (completion-styles '(flex)))
+
+(use-package helm-swoop
+  :ensure t
+  :bind ("C-s" . helm-swoop))
+
 (use-package helm-lsp
   :ensure t
-  :bind (:map lsp-mode-map ([remap xref-find-apropos] . helm-lsp-workspace-symbol)))
+  :commands helm-lsp-workspace-symbol)
 
 								; Programming Languages
+
+;; YAML
+(use-package yaml-mode
+  :ensure t)
 
 ;;Salt state
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
@@ -334,6 +344,9 @@ current buffer."
 ;; Org mode agenda
 (define-key org-mode-map (kbd "C-c a") 'org-agenda)
 
+;; Rest client
+(use-package restclient
+  :ensure t)
 
 								; Customize
 ;; Place customize files in seperate file
