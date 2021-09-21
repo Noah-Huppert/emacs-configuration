@@ -256,6 +256,10 @@ current buffer."
 
 								; Programming Languages
 
+;; YAML
+(use-package yaml-mode
+  :ensure t)
+
 ;;Salt state
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
 
