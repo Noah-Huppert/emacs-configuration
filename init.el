@@ -250,6 +250,10 @@ current buffer."
   :config
   (helm-mode 1))
 
+(use-package helm-swoop
+  :ensure t
+  :bind ("C-s" . helm-swoop))
+
 								; Programming Languages
 
 ;;Salt state
