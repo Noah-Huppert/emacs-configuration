@@ -69,8 +69,8 @@
 
 ;; Editor config
 (use-package editorconfig
-  :ensure t)
-(editorconfig-mode 1)
+  :ensure t
+  :config (editorconfig-mode 1))
 
 ;; Line numbers
 (global-linum-mode)
