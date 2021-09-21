@@ -266,6 +266,10 @@ current buffer."
   :ensure t
   :commands helm-lsp-workspace-symbol)
 
+;; Rest client
+(use-package restclient
+  :ensure t)
+
 								; Programming Languages
 
 ;; YAML
@@ -343,10 +347,6 @@ current buffer."
 
 ;; Org mode agenda
 (define-key org-mode-map (kbd "C-c a") 'org-agenda)
-
-;; Rest client
-(use-package restclient
-  :ensure t)
 
 								; Customize
 ;; Place customize files in seperate file
