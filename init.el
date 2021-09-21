@@ -247,8 +247,9 @@ current buffer."
   :ensure t
   :bind ("M-x" . helm-M-x)
   :bind ("C-x C-f" . helm-find-files)
-  :config
-  (helm-mode 1))
+  :bind ("C-z" . helm-execute-persistent-action)
+  :config (helm-mode 1)
+  :custom (completion-styles '(flex)))
 
 (use-package helm-swoop
   :ensure t
