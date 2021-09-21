@@ -149,9 +149,9 @@ current buffer."
 ;; (add-hook 'go-mode-hook 'lsp-mode)
 
 ;; Show function arguments on hover
-(add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-(add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
-(add-hook 'ielm-mode-hook 'eldoc-mode)
+;; (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
+;; (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
+;; (add-hook 'ielm-mode-hook 'eldoc-mode)
 
 ;; Org mode
 (if (boundp 'my-org-agenda-files)
