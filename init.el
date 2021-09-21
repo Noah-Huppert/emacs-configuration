@@ -333,7 +333,12 @@ current buffer."
 ;; Foreman Procfile
 (add-to-list 'auto-mode-alist '("\\Procfile\\'" . conf-mode))
 
+;; Dockerfile
+(use-package dockerfile-mode
+  :ensure t)
+
 								; Key Bindings
+
 ;; Make M-f to move to the beginning of the next word
 (require 'misc)
 (define-key global-map (kbd "M-f") (lambda ()
