@@ -266,6 +266,10 @@ current buffer."
   :ensure t
   :commands helm-lsp-workspace-symbol)
 
+(use-package helm-projectile
+  :ensure t
+  :config (helm-projectile-on))
+
 ;; Rest client
 (use-package restclient
   :ensure t)
