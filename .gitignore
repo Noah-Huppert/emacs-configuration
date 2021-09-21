@@ -27,3 +27,6 @@ transient/
 # Image thumbnails
 image-dired/
 thumbs/
+
+# Helm Google search
+/url/
