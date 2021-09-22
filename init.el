@@ -26,7 +26,7 @@
 (global-font-lock-mode t)
 
 ;; Font
-(setq default-frame-alist '((font . "Hack-12")))
+;; (setq default-frame-alist '((font . "Hack-12")))
 (if (boundp 'my-font-size) (set-face-attribute 'default nil :height my-font-size))
 
 ;; Tab width
