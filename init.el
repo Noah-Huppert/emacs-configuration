@@ -232,11 +232,28 @@ current buffer."
 (use-package vterm
   :ensure t)
 
+(setq vterm-minibuffer-sess-id 10)
+(setq vterm-minibuffer-name "*vterm-minibuffer*")
+(defun vterm-minibuffer ()
+  "Run a command specified in a minibuffer using vterm"
+  (interactive)
+  (setq cmd (read-from-minibuffer (format "%s $ " default-directory)))
+  (let ((current-prefix-arg 10)
+	   (vterm-buffer-name vterm-minibuffer-name))
+    (call-interactively 'vterm))
+  (vterm-send-C-u) ; Clear line, in case cmd partially entered
+  (comint-send-string
+   (format "%s<%d>" vterm-minibuffer-name vterm-minibuffer-sess-id)
+   (format "%s\n" cmd))
+  )
+
+(define-key global-map (kbd "M-!") (lambda () (interactive) (vterm-minibuffer)))
+  
 ;; Git integration
 (use-package magit
   :ensure t)
 
-;; Dired
+;; Diredq
 (use-package dired-avfs
   :ensure t)
 (use-package dired-subtree
