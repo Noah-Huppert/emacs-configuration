@@ -276,8 +276,8 @@ current buffer."
   :custom (completion-styles '(flex)))
 
 (use-package helm-swoop
-  :ensure t
-  :bind ("C-s" . helm-swoop))
+  :ensure t)
+  ;; :bind ("C-s" . helm-swoop))
 
 (use-package helm-lsp
   :ensure t
