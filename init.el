@@ -232,19 +232,71 @@ current buffer."
 (use-package vterm
   :ensure t)
 
+;;; TODO: New vterm prefix arg buffer <id> for each dir
+;;; TODO: history
+;;; TODO: helm auto complete
+;;; TODO: Better window handlings
+;;;       - Make window split then open vterm
+;;;       - Make easy to close vterm?
+;;;       - Customize if output is focused (default: don't??)
+;;; TODO: Allow creating new term for same dir
 (setq vterm-minibuffer-sess-id 10)
 (setq vterm-minibuffer-name "*vterm-minibuffer*")
+
+(defun vterm-minibuffer-ensure-buffer ()
+  "Makes a interactive VTerm buffer for the pwd if one does not exist.
+Returns the VTerm buffer."
+  (interactive)
+    (let ((current-prefix-arg 10)
+	   (vterm-buffer-name vterm-minibuffer-name))
+	 (call-interactively 'vterm)))
+
+;; The function to use when vterm-minibuffer-split-window-next determines a new window needs to be created. This function should return the new window object.
+(setq vterm-minibuffer-split-window-next-split-function 'split-window-below)
+(defun vterm-minibuffer-split-window-next ()
+  "Selects a new window for the vterm buffer to use. If there is only one window open uses the vterm-minibuffer-split-window-next-split-function to create one.
+Returns window split to use for vterm."
+  (interactive)
+  (if (eq (next-window) (get-buffer-window)) ; If no split
+	 (let ((split-result (funcall vterm-minibuffer-split-window-next-split-function)))
+	   (select-window split-result)
+	   (split-result))
+    (let ((next-window-v next-window))
+	 (select-window next-window-v)
+	 (next-window-v))))
+
+(defun vterm-minibuffer-split-window-other ()
+  " Selects the other window regardless of if it is the same as the origin window.
+Returns this window."
+  (interactive)
+    (select-window (next-window))
+    (get-buffer-window))
+
+;; The function vterm-minibuffer-split-window should use to select the window for the vterm buffer. This function should select and return the window.
+;; (setq vterm-minibuffer-split-function 'vterm-minibuffer-split-window-next)
+(setq vterm-minibuffer-split-function 'vterm-minibuffer-split-window-other)
+(defun vterm-minibuffer-split-window ()
+  "Makes a window using vterm-minibuffer-split-function which will be used to house the vterm buffer."
+  (interactive)
+  (funcall-interactively vterm-minibuffer-split-function))
+
 (defun vterm-minibuffer ()
   "Run a command specified in a minibuffer using vterm"
   (interactive)
   (setq cmd (read-from-minibuffer (format "%s $ " default-directory)))
-  (let ((current-prefix-arg 10)
-	   (vterm-buffer-name vterm-minibuffer-name))
-    (call-interactively 'vterm))
-  (vterm-send-C-u) ; Clear line, in case cmd partially entered
-  (comint-send-string
-   (format "%s<%d>" vterm-minibuffer-name vterm-minibuffer-sess-id)
-   (format "%s\n" cmd))
+  (let ((origin-window (get-buffer-window))
+	   (origin-buffer (current-buffer))
+	   (split-window (vterm-minibuffer-split-window))
+	   (vterm-buffer (vterm-minibuffer-ensure-buffer)))
+    (select-window origin-window)
+    ;; If switching to origin window didn't end us back at origin buffer => probably only one window open.
+    ;; Explicitly switch back to origin buffer.
+    (if (not (eq (current-buffer) origin-buffer))
+	   (switch-to-buffer origin-buffer))
+    (vterm-send-C-u) ; Clear cmd prompt, in case another cmd partially entered
+    (comint-send-string ; Send cmd to vterm buffer and run
+	(format "%s<%d>" vterm-minibuffer-name vterm-minibuffer-sess-id)
+	(format "%s\n" cmd)))
   )
 
 (define-key global-map (kbd "M-!") (lambda () (interactive) (vterm-minibuffer)))
