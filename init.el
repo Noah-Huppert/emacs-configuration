@@ -235,24 +235,31 @@ current buffer."
 (use-package vterm
   :ensure t)
 
-;;; TODO: New vterm prefix arg buffer <id> for each dir
 ;;; TODO: history
 ;;; TODO: helm auto complete
 ;;; TODO: Better window handlings
-;;;       - Make window split then open vterm
 ;;;       - Make easy to close vterm?
 ;;;       - Customize if output is focused (default: don't??)
-;;; TODO: Allow creating new term for same dir
+;;; TODO: Cancel buffer & window focus on canceled cmd query input
 (setq vterm-minibuffer-sess-id 10)
-(setq vterm-minibuffer-name "*vterm-minibuffer*")
+(setq vterm-minibuffer-name-base "*vterm-minibuffer*")
 
-(defun vterm-minibuffer-ensure-buffer ()
-  "Makes a interactive VTerm buffer for the pwd if one does not exist.
-Returns the VTerm buffer."
+(defun vterm-minibuffer-vterm-buffer-name ()
+  " Returns the name of a VTerm buffer for the current default-directory."
+  (format "%s [%s]"
+		vterm-minibuffer-name-base
+		default-directory))
+
+(defun vterm-minibuffer-vterm-buffer (id)
+  "Makes a interactive VTerm buffer for the current default-directory if one does not exist.
+
+ID is the numerical prefix argument to pass to vterm when creating or re-using existing VTerm buffer.
+
+Returns the new or existing VTerm buffer."
   (interactive)
-    (let ((current-prefix-arg 10)
-	   (vterm-buffer-name vterm-minibuffer-name))
-	 (call-interactively 'vterm)))
+  (let ((current-prefix-arg id)
+	   (vterm-buffer-name (vterm-minibuffer-vterm-buffer-name))) ; Tell vterm fn the name of the new vterm buffer we want
+    (call-interactively 'vterm)))
 
 ;; The function to use when vterm-minibuffer-split-window-next determines a new window needs to be created. This function should return the new window object.
 (setq vterm-minibuffer-split-window-next-split-function 'split-window-below)
@@ -283,14 +290,17 @@ Returns this window."
   (interactive)
   (funcall-interactively vterm-minibuffer-split-function))
 
-(defun vterm-minibuffer ()
-  "Run a command specified in a minibuffer using vterm"
-  (interactive)
-  (setq cmd (read-from-minibuffer (format "%s $ " default-directory)))
+(defun vterm-minibuffer (subid)
+  "Run a command specified in a minibuffer using vterm.
+
+SUBID specifies if which of the potential multiple shells for the default-directory to execute the command within. The SUBID 1 is automatically created, specify SUBIDs great than 1 to make new shells."
+  (interactive "p") ; Numeric prefix argument, no prompt
+  (unless subid (setq subid 1))
   (let ((origin-window (get-buffer-window))
 	   (origin-buffer (current-buffer))
 	   (split-window (vterm-minibuffer-split-window))
-	   (vterm-buffer (vterm-minibuffer-ensure-buffer)))
+	   (vterm-buffer (vterm-minibuffer-vterm-buffer subid))
+	   (cmd (read-from-minibuffer (format "%s<%d> $ " default-directory subid))))
     (select-window origin-window)
     ;; If switching to origin window didn't end us back at origin buffer => probably only one window open.
     ;; Explicitly switch back to origin buffer.
@@ -298,11 +308,11 @@ Returns this window."
 	   (switch-to-buffer origin-buffer))
     (vterm-send-C-u) ; Clear cmd prompt, in case another cmd partially entered
     (comint-send-string ; Send cmd to vterm buffer and run
-	(format "%s<%d>" vterm-minibuffer-name vterm-minibuffer-sess-id)
+	vterm-buffer
 	(format "%s\n" cmd)))
   )
 
-(define-key global-map (kbd "M-!") (lambda () (interactive) (vterm-minibuffer)))
+(define-key global-map (kbd "M-!") 'vterm-minibuffer)
   
 ;; Git integration
 (use-package magit
