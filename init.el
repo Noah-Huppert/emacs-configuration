@@ -1,4 +1,7 @@
 								; Emacs Core
+;; Print debug information
+(setq debug-on-error t)
+
 (message "---------- NEW init.el LOAD ----------")
 
 ;; Local plugins
