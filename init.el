@@ -332,11 +332,12 @@ SUBID specifies if which of the potential multiple shells for the vterm-minibuff
 (use-package magit
   :ensure t)
 
-;; Diredq
+;; Dired
 (use-package dired-avfs
   :ensure t)
 (use-package dired-subtree
   :ensure t)
+(setq dired-listing-switches (concat dired-listing-switches "h"))
 
 ;; Language server protocol support
 (use-package lsp-mode
