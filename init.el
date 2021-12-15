@@ -447,6 +447,10 @@ SUBID specifies if which of the potential multiple shells for the vterm-minibuff
 (use-package dockerfile-mode
   :ensure t)
 
+;; Terraform
+(use-package terraform-mode
+  :ensure t)
+
 								; Key Bindings
 
 ;; Make M-f to move to the beginning of the next word
