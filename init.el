@@ -314,7 +314,7 @@ SUBID specifies if which of the potential multiple shells for the vterm-minibuff
     (let ((origin-window (get-buffer-window))
 		(origin-buffer (current-buffer))
 		(split-window (vterm-minibuffer-split-window))
-		(vterm-buffer (vterm-minibuffer-vterm-buffer base-dir subid))
+		(vterm-buffer (vterm-minibuffer-vterm-buffer base-dir subid)) ; TODO: Fix bug where vterm shell doesn't actually open in correct directory!
 		(cmd (read-from-minibuffer (format "<%d> %s $ " subid base-dir))))
 	 (select-window origin-window)
 	 ;; If switching to origin window didn't end us back at origin buffer => probably only one window open.
