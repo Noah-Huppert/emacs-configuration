@@ -344,6 +344,7 @@ SUBID specifies if which of the potential multiple shells for the vterm-minibuff
   :ensure t
   :init
   (setq lsp-keymap-prefix "C-c l")
+  :hook ((web-mode . lsp))
   :commands lsp)
 
 ;; Helm
