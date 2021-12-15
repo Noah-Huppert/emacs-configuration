@@ -8,7 +8,7 @@
  '(image-dired-append-when-browsing t)
  '(image-dired-thumb-size 100)
  '(package-selected-packages
-   '(wgrep-helm wgrep helm-projectile helm-lsp helm-google helm-swoop gitconfig-mode gitattributes-mode web-mode px helm org-bullets restclient magit dired-subtree dired-rainbow dired-avfs dired-hacks use-package vterm yaml-mode auto-complete dap-mode json-mode projectile shell-switcher transpose-frame doom-themes vlf tangotango-theme gitignore-mode protobuf-mode editorconfig rust-mode company-lsp lsp-mode company zenburn-theme web-narrow-mode tide typescript-mode dart-mode terraform-mode web-mode-edit-element vue-mode python-mode dockerfile-mode elixir-mode ## go-mode markdown-mode+ rainbow-mode popup paradox markdown-mode helm-core))
+   '(helm-tramp wgrep-helm wgrep helm-projectile helm-lsp helm-google helm-swoop gitconfig-mode gitattributes-mode web-mode px helm org-bullets restclient magit dired-subtree dired-rainbow dired-avfs dired-hacks use-package vterm yaml-mode auto-complete dap-mode json-mode projectile shell-switcher transpose-frame doom-themes vlf tangotango-theme gitignore-mode protobuf-mode editorconfig rust-mode company-lsp lsp-mode company zenburn-theme web-narrow-mode tide typescript-mode dart-mode terraform-mode web-mode-edit-element vue-mode python-mode dockerfile-mode elixir-mode ## go-mode markdown-mode+ rainbow-mode popup paradox markdown-mode helm-core))
  '(projectile-mode t nil (projectile))
  '(size-indication-mode t))
 (custom-set-faces
