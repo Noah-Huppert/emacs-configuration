@@ -368,6 +368,9 @@ SUBID specifies if which of the potential multiple shells for the vterm-minibuff
   :ensure t
   :config (helm-projectile-on))
 
+(use-package helm-tramp
+  :ensure t)
+
 ;; Writeable grep buffer
 (use-package wgrep
   :ensure t
