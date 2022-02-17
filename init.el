@@ -451,6 +451,10 @@ SUBID specifies if which of the potential multiple shells for the vterm-minibuff
 (use-package terraform-mode
   :ensure t)
 
+;; Godot
+(use-package gdscript-mode
+  :ensure t)
+
 								; Key Bindings
 
 ;; Make M-f to move to the beginning of the next word
