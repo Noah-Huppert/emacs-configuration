@@ -1,4 +1,4 @@
-								; Emacs Core
+ ; Emacs Core
 ;; Print debug information
 (setq debug-on-error t)
 
@@ -453,6 +453,9 @@ SUBID specifies if which of the potential multiple shells for the vterm-minibuff
 
 ;; Godot
 (use-package gdscript-mode
+  :ensure t)
+
+(use-package rust-mode
   :ensure t)
 
 								; Key Bindings
