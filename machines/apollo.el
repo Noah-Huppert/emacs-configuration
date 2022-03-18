@@ -1,7 +1,7 @@
 ;; Font size within Emacs
-;;; 80 - for laptop screen
+;;; 80  - for laptop screen
 ;;; 120 - for 4k
-(setq my-font-size 120)
+(setq my-font-size (if (> (display-pixel-width) 1280) 120 80))
 
 ;; Location of Org mode agenda files on this machine
 (setq my-org-agenda-files
