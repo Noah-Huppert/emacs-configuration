@@ -424,6 +424,7 @@ SUBID specifies if which of the potential multiple shells for the vterm-minibuff
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.jsx\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mjs\\'" . web-mode))
   :hook (web-mode .
 			   (lambda ()
 				(when (string-equal "tsx" (file-name-extension buffer-file-name))
@@ -456,6 +457,11 @@ SUBID specifies if which of the potential multiple shells for the vterm-minibuff
   :ensure t)
 
 (use-package rust-mode
+  :ensure t)
+
+(use-package graphql-mode
+  :ensure t)
+(use-package request
   :ensure t)
 
 								; Key Bindings
