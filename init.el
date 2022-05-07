@@ -1,6 +1,6 @@
  ; Emacs Core
 ;; Print debug information
-;; (setq debug-on-error t)				;
+;; (setq debug-on-error t)
 
 (message "---------- NEW init.el LOAD ----------")
 
@@ -242,6 +242,7 @@ current buffer."
 ;;;       - Make easy to close vterm?
 ;;;       - Customize if output is focused (default: don't??)
 ;;; TODO: Cancel buffer & window focus on canceled cmd query input
+;;; TODO: Open vterm window and focus without entering command
 (setq vterm-minibuffer-sess-id 10)
 (setq vterm-minibuffer-name-base "*vterm-minibuffer*")
 
@@ -285,10 +286,10 @@ Returns window split to use for vterm."
   (if (eq (next-window) (get-buffer-window)) ; If no split
 	 (let ((split-result (funcall vterm-minibuffer-split-window-next-split-function)))
 	   (select-window split-result)
-	   (split-result))
-    (let ((next-window-v next-window))
+	   split-result)
+    (let ((next-window-v (next-window)))
 	 (select-window next-window-v)
-	 (next-window-v))))
+	 next-window-v)))
 
 (defun vterm-minibuffer-split-window-other ()
   " Selects the other window regardless of if it is the same as the origin window.
@@ -298,8 +299,8 @@ Returns this window."
     (get-buffer-window))
 
 ;; The function vterm-minibuffer-split-window should use to select the window for the vterm buffer. This function should select and return the window.
-;; (setq vterm-minibuffer-split-function 'vterm-minibuffer-split-window-next)
-(setq vterm-minibuffer-split-function 'vterm-minibuffer-split-window-other)
+(setq vterm-minibuffer-split-function 'vterm-minibuffer-split-window-next)
+;; (setq vterm-minibuffer-split-function 'vterm-minibuffer-split-window-other)
 (defun vterm-minibuffer-split-window ()
   "Makes a window using vterm-minibuffer-split-function which will be used to house the vterm buffer."
   (interactive)
@@ -311,9 +312,9 @@ Returns this window."
 SUBID specifies if which of the potential multiple shells for the vterm-minibuffer-base-dir to execute the command within. The SUBID 1 is automatically created, specify SUBIDs great than 1 to make new shells."
   (interactive "p") ; Numeric prefix argument, no prompt
   (unless subid (setq subid 1))
-  (let ((base-dir (vterm-minibuffer-base-dir origin-buffer)))
-    (let ((origin-window (get-buffer-window))
-		(origin-buffer (current-buffer))
+  (let ((origin-buffer (current-buffer)))
+    (let ((base-dir (vterm-minibuffer-base-dir origin-buffer)))
+    (let ((origin-window (get-buffer-window))		
 		(split-window (vterm-minibuffer-split-window))
 		(vterm-buffer (vterm-minibuffer-vterm-buffer base-dir subid)) ; TODO: Fix bug where vterm shell doesn't actually open in correct directory!
 		(cmd (read-from-minibuffer (format "<%d> %s $ " subid base-dir))))
@@ -325,7 +326,7 @@ SUBID specifies if which of the potential multiple shells for the vterm-minibuff
 	 (vterm-send-C-u) ; Clear cmd prompt, in case another cmd partially entered
 	 (comint-send-string ; Send cmd to vterm buffer and run
 	  vterm-buffer
-	  (format "%s\n" cmd)))))
+	  (format "%s\n" cmd))))))
 
 (define-key global-map (kbd "M-!") 'vterm-minibuffer)
   
