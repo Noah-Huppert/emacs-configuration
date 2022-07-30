@@ -143,20 +143,6 @@ current buffer."
 	    (kill-buffer)))
 (global-set-key (kbd "C-c x") 'save-and-kill-buffer)
 
-;; Auto complete
-;; (require 'company)
-;; (require 'company-lsp)
-;; (require 'lsp-mode)
-;; (add-hook 'after-init-hook 'global-company-mode)
-;; (push 'company-lsp company-backends)
-
-;; (add-hook 'go-mode-hook 'lsp-mode)
-
-;; Show function arguments on hover
-;; (add-hook 'emacs-lisp-mode-hook 'eldoc-mode)
-;; (add-hook 'lisp-interaction-mode-hook 'eldoc-mode)
-;; (add-hook 'ielm-mode-hook 'eldoc-mode)
-
 ;; Org mode
 (if (boundp 'my-org-agenda-files)
     (setq org-agenda-files (mapcar 'expand-file-name my-org-agenda-files)))
@@ -349,7 +335,14 @@ SUBID specifies if which of the potential multiple shells for the vterm-minibuff
   :hook ((web-mode . lsp))
   :commands lsp)
 
-;; Helm
+(use-package eglot
+  :ensure t)
+
+(use-package company
+  :ensure t
+  :init (global-company-mode))
+
+;; Helmq
 (use-package helm
   :ensure t
   :bind ("M-x" . helm-M-x)
@@ -402,6 +395,10 @@ SUBID specifies if which of the potential multiple shells for the vterm-minibuff
   :mode ("\\.go\\'" . go-mode)
   :init
   (add-hook 'before-save-hook #'gofmt-before-save))
+
+;; C#
+(use-package csharp-mode
+  :ensure t)
 
 ;; LaTeX
 ;;; Preview Latex inline
