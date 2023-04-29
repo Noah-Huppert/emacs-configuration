@@ -79,6 +79,9 @@
 ;; Line numbers
 (global-linum-mode)
 
+;; Hide toolbar in GUI
+(tool-bar-mode -1)
+
 ;; Max line length
 ;;; (use-package column-marker)
 ;;; (add-hook 'text-mode-hook (lambda () (interactive) (column-marker-3 80)))
