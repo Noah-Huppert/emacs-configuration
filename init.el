@@ -79,8 +79,9 @@
 ;; Line numbers
 (global-linum-mode)
 
-;; Hide toolbar in GUI
+;; Hide GUI elements
 (tool-bar-mode -1)
+(scroll-bar-mode -1)
 
 ;; Max line length
 ;;; (use-package column-marker)
