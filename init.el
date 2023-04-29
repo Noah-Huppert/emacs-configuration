@@ -437,11 +437,7 @@ SUBID specifies if which of the potential multiple shells for the vterm-minibuff
   )
 
 ;; Git config files
-(use-package gitattributes-mode
-  :ensure t)
-(use-package gitconfig-mode
-  :ensure t)
-(use-package gitignore-mode
+(use-package git-modes
   :ensure t)
 
 ;; Foreman Procfile
