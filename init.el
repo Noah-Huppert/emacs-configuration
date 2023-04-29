@@ -173,7 +173,6 @@ current buffer."
               ("RET" . magit-diff-visit-file-other-window)
               :map magit-hunk-section-map
               ("RET" . magit-diff-visit-file-other-window))
-  :bind (("C-x g" . magit-status))
   :custom
   (ediff-window-setup-function 'ediff-setup-windows-plain) ; Make ediff navigation window not open in new window
   )
