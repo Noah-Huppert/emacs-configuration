@@ -487,6 +487,6 @@ SUBID specifies if which of the potential multiple shells for the vterm-minibuff
 								; Customize
 ;; Place customize files in seperate file
 ;; Intentionally last so that use-package can install anything required by these customizations.
-(setq custom-file (concat "~/.emacs.d/machines/" (system-name) ".el"))
+(setq custom-file (concat "~/.emacs.d/machines/" (system-name) "-custom.el"))
 (load custom-file)
     
