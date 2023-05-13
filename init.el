@@ -28,10 +28,6 @@
 ;; Enable syntax highlighting
 (global-font-lock-mode t)
 
-;; Font
-(setq default-frame-alist '((font . "Hack")))
-(if (boundp 'my-font-size) (set-face-attribute 'default nil :height my-font-size))
-
 ;; Tab width
 (setq-default tab-width 5)
 
@@ -379,6 +375,11 @@ SUBID specifies if which of the potential multiple shells for the vterm-minibuff
 (use-package restclient
   :ensure t)
 
+(use-package highlight-indent-guides
+  :ensure t
+  :hook (prog-mode . highlight-indent-guides-mode)
+  :custom (highlight-indent-guides-method 'bitmap))
+
 								; Programming Languages
 
 ;; YAML
@@ -392,6 +393,10 @@ SUBID specifies if which of the potential multiple shells for the vterm-minibuff
 (use-package markdown-mode
   :ensure t)
 (setq markdown-command "/bin/pandoc")
+
+;; Dart
+(use-package dart-mode
+  :ensure t)
 
 ;; Go
 (use-package go-mode
@@ -482,6 +487,6 @@ SUBID specifies if which of the potential multiple shells for the vterm-minibuff
 								; Customize
 ;; Place customize files in seperate file
 ;; Intentionally last so that use-package can install anything required by these customizations.
-(setq custom-file "~/.emacs.d/custom.el")
+(setq custom-file (concat "~/.emacs.d/machines/" (system-name) ".el"))
 (load custom-file)
     
